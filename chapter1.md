@@ -1,6 +1,6 @@
 ---
-title       : Insert the chapter title here
-description : Insert the chapter description here
+title       : Chapter 1
+description : This is a test chapter
 attachments :
   slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
 
@@ -112,3 +112,52 @@ test_error()
 
 success_msg("Good work!")
 ```
+
+--- type:BulletExercise lang:r xp:150 key:79e232200d
+
+## Building a plot!
+
+*** =pre_exercise_code
+```{r}
+library(ggplot2)
+```
+
+*** =sample_code
+```{r}
+ggplot(mtcars, aes(x = mpg, y = wt))
+```
+
+*** =type1:NormalExercise
+*** =xp1: 30
+*** =key1: 1db0bdc483
+
+
+*** =instructions1
+Use `geom_point` to add a scatterplot
+
+*** =hint1
+Submit the query!
+
+*** =solution1
+```{r}
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point()
+```
+
+*** =type2:NormalExercise
+*** =key2: 555a6267d7
+*** =xp2: 30
+
+*** =instructions2
+Use `geom_smooth` with `method` set to `lm` to add a regression line
+
+*** =hint2
+Submit the query!
+
+*** =solution2
+```{r}
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point() +
+  geom_smooth(method = 'lm', se = F)
+```
+
