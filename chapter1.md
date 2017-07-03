@@ -161,7 +161,7 @@ ggplot(mtcars, aes(x = mpg, y = wt)) +
   geom_smooth(method = 'lm', se = F)
 ```
 
---- type:TabExercise lang:r xp:100
+--- type:TabExercise lang:r xp:100 key:dbbca81c55
 
 ## Advanced Group By Exercises
 
@@ -180,6 +180,8 @@ hflights %>%
 
 
 *** =type1:NormalExercise 
+*** =key1: 421e55e2ec
+
 *** =xp1: 30
 
 *** =instructions1
@@ -195,6 +197,8 @@ hflights %>%
 ```
 
 *** =type2:NormalExercise 
+*** =key2: 6eb56c5f40
+
 *** =xp2: 30
 
 *** =instructions2
@@ -212,6 +216,8 @@ hflights %>%
 
 
 *** =type3:NormalExercise 
+*** =key3: be3d94b96c
+
 *** =xp3: 30
 
 *** =instructions3
@@ -228,7 +234,7 @@ hflights %>%
   filter(rank == 1)
 ```
 
---- type:BulletExercise lang:r
+--- type:BulletExercise lang:r key:5189de74d5
 
 ## Selecting groups or parts of groups
 
