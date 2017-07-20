@@ -175,6 +175,7 @@ As this is the first time you are combining multiple dplyr concepts, we have bro
 
 ```{r}
 library(dplyr)
+library(hflights)
 ```
 
 *** =sample_code
@@ -261,6 +262,7 @@ setkey(DT, A, B)
 *** =pre_exercise_code
 
 ```{r}
+library(data.table)
 DT <- data.table(
   A = letters[c(2, 1, 2, 3, 1, 2, 3)], 
   B = c(5, 4, 1, 9, 8, 8, 6), 
