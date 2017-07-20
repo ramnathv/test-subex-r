@@ -171,6 +171,12 @@ Let us suppose we want to find the most visited destination for each carrier. Be
 
 As this is the first time you are combining multiple dplyr concepts, we have broken this exercise down into smaller steps. Each step will allow you to focus on a specific concept.
 
+*** =pre_exercise_code
+
+```{r}
+library(dplyr)
+```
+
 *** =sample_code
 
 ```{r}
