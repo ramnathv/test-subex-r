@@ -278,7 +278,8 @@ setkey(DT, A, B)
 ```
 
 
-
+*** =type1:NormalExercise
+*** =xp1:30
 *** =instructions1
 
 Select the "b" group without using ==.
@@ -289,7 +290,8 @@ Select the "b" group without using ==.
 # Select the "b" group
 DT["b"]
 ```
-
+*** =type2:NormalExercise
+*** =xp2:30
 
 *** =instructions2
 
@@ -302,6 +304,9 @@ Select the "b" and "c" groups, without using ==.
 DT[c("b", "c")]
 ```
 
+
+*** =type3:NormalExercise
+*** =xp3:30
 *** =instructions3
 
 Select the first row of the "b" and "c" groups using `mult`.
@@ -313,6 +318,8 @@ Select the first row of the "b" and "c" groups using `mult`.
 DT[c("b", "c"), mult = "first"]
 ```
 
+*** =type4:NormalExercise
+*** =xp4:30
 *** =instructions4
 
 Select the first and last row of the "b" and "c" groups. You will need to use `by = .EACHI` and `.SD` 
@@ -323,6 +330,8 @@ Select the first and last row of the "b" and "c" groups. You will need to use `b
 # First and last row of the "b" and "c" groups
 DT[c("b", "c"), .SD[c(1, .N)], by = .EACHI]
 ```
+*** =type5:NormalExercise
+*** =xp5:30
 
 *** =instructions5
 
