@@ -358,3 +358,28 @@ You can use curly brackets to include two separate instructions inside the `j` a
 DT[c("b", "c"), {print(.SD); .SD[c(1, .N)]}, by = .EACHI]
 ```
 
+--- type:RStudioMultipleChoiceExercise xp:50 skills:1
+
+## Let's get you set up!
+
+In order for you to use the RStudio IDE on your own computer, you will need to install the appropriate items. Garrett just explained how to do this for Mac, PC and Linux users.
+
+Which website should you visit to download a copy of the R language?
+
+*** =instructions
+- rstudio.com/download
+- cran.r-project.org
+- You do not need to download a copy of the R language
+
+*** =hint
+Garrett showed you two websites you need to visit to download the appropriate software.
+
+*** =sct
+```{r,eval=FALSE}
+msg1 <- "Not quite! You can visit rstudio.com/download[(https://www.rstudio.com/products/rstudio/download/)] to download the RStudio IDE, but not a copy of the R language itself."
+msg2 <- "Nice! Let's start taking a look at all the cool stuff you just downloaded."
+msg3 <- "Try again! It is important to download a copy of the R language in order to use the RStudio IDE and perform data analysis on your desktop or server."
+
+test_mc(2, feedback_msgs = c(msg1, msg2, msg3))
+```
+
