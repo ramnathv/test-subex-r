@@ -279,6 +279,8 @@ setkey(DT, A, B)
 
 
 *** =type1:NormalExercise
+*** =key1: 641a9fce9f
+
 *** =xp1:30
 *** =instructions1
 
@@ -291,6 +293,8 @@ Select the "b" group without using ==.
 DT["b"]
 ```
 *** =type2:NormalExercise
+*** =key2: b8a220e53f
+
 *** =xp2:30
 
 *** =instructions2
@@ -306,6 +310,8 @@ DT[c("b", "c")]
 
 
 *** =type3:NormalExercise
+*** =key3: 7fa55e05d7
+
 *** =xp3:30
 *** =instructions3
 
@@ -319,6 +325,8 @@ DT[c("b", "c"), mult = "first"]
 ```
 
 *** =type4:NormalExercise
+*** =key4: 4652f8cfbb
+
 *** =xp4:30
 *** =instructions4
 
@@ -331,6 +339,8 @@ Select the first and last row of the "b" and "c" groups. You will need to use `b
 DT[c("b", "c"), .SD[c(1, .N)], by = .EACHI]
 ```
 *** =type5:NormalExercise
+*** =key5: 334e27b0c6
+
 *** =xp5:30
 
 *** =instructions5
