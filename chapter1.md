@@ -358,7 +358,7 @@ You can use curly brackets to include two separate instructions inside the `j` a
 DT[c("b", "c"), {print(.SD); .SD[c(1, .N)]}, by = .EACHI]
 ```
 
---- type:RStudioMultipleChoiceExercise xp:50 skills:1
+--- type:RStudioMultipleChoiceExercise xp:50 skills:1 key:a5dc9ea6f9
 
 ## Let's get you set up!
 
