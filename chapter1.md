@@ -273,3 +273,84 @@ msg3 <- "Try again! It is important to download a copy of the R language in orde
 test_mc(2, feedback_msgs = c(msg1, msg2, msg3))
 ```
 
+--- type:TabExercise lang:r xp:90 key:cb0d9a46a3
+
+In this exercise we'll take a look at a more subtle example of defining and using linear models. ggplot2 and the Vocab data frame are already loaded for you.
+
+*** =pre_exercise_code
+
+```{r}
+library(ggplot2)
+theme_set(theme_gray())
+library(car)
+library(RColorBrewer)
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# !   DON'T REMOVE THIS SUBSAMPLING PLEASE, BACKEND CAN'T HANDLE BIGGER DATASET TO PLOT   !
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+set.seed(1)
+Vocab <- car::Vocab
+Vocab <- Vocab[sample(1:nrow(Vocab), nrow(Vocab)*0.1),]
+```
+
+
+*** =sample_code
+
+```{r}
+ggplot(Vocab, aes(x = education, y = vocabulary)) +
+  geom_jitter(alpha = 0.2)
+```
+
+*** =type1:NormalExercise
+*** =key1: 33c3544039
+*** =xp1: 30
+
+*** =instructions1
+
+Add a `stat_smooth()` layer with method set to "lm" and `se = FALSE` to this jittered plot of `vocabulary` against `education`.
+
+*** =solution1
+
+```{r}
+# Plot 1: Jittered scatter plot, add a linear model (lm) smooth
+ggplot(Vocab, aes(x = education, y = vocabulary)) +
+  geom_jitter(alpha = 0.2) +
+  stat_smooth(method = "lm", se = F)
+```
+
+*** =type2:NormalExercise
+*** =key2: 636df4c77e
+*** =xp2: 30
+
+*** =instructions2
+
+Update the plot so that points are colored by `year`. You should remove the `geom_jitter` layer from the plot.
+
+
+*** =solution2
+
+```{r}
+# Plot 2: Only lm, colored by year
+ggplot(Vocab, aes(x = education, y = vocabulary, col = factor(year))) +
+  stat_smooth(method = "lm", se = F)
+```
+
+
+*** =type3:NormalExercise
+*** =key3: adabd6e0ef
+*** =xp3: 30
+
+*** =instructions3
+
+Use a sequential color palette to make the plot prettier. This can be done by setting `col = year` and `group = factor(year)` in the `ggplot` call. Use `scale_color_gradientn` with colors drawn from a ColorBrewer palette.
+
+*** =solution3
+
+```{r}
+# Plot 4: Change col and group, specify alpha, size and geom, and 
+# add scale_color_gradient
+ggplot(Vocab, aes(x = education, y = vocabulary, col = year, group = factor(year))) +
+  stat_smooth(method = "lm", se = F, alpha = 0.6, size = 2) +
+  scale_color_gradientn(colors = brewer.pal(9,"YlOrRd"))
+```
+
+
