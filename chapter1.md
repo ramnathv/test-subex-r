@@ -363,7 +363,7 @@ ggplot(Vocab, aes(x = education, y = vocabulary, col = year, group = factor(year
 
 ## Base Graphics vs. Ggplot2 - Part 1
 
-To better appreciate `ggplot2` and understand how it works differently from base package, let us create a scatterplot of `hp` (horsepower) vs `drat` (rear axle ration) colored by `cyl` (number of cylinders).
+To better appreciate `ggplot2` and understand how it works differently from base package, let us create a scatterplot of `hp` (horsepower) vs `drat` (rear axle ratio), colored by `cyl` (number of cylinders).
 
 ```{r}
 # Base Graphics
