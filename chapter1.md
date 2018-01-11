@@ -370,7 +370,7 @@ To better appreciate `ggplot2` and understand how it works differently from base
 plot(mtcars$hp, mtcars$drat, col = as.factor(mtcars$cyl))
 
 # Ggplot2
-ggplot(mtcars, aes(x = wt, y = mpg, col = as.factor(cyl))) +
+ggplot(mtcars, aes(x = hp, y = drat, col = as.factor(cyl))) +
   geom_point()
 ```
 
