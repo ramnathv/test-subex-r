@@ -55,11 +55,17 @@ ggplot(mtcars, aes(x = mpg, y = wt)) +
 
 ## Advanced Group By Exercises
 
+Let us suppose we want to find the **most visited destination for each carrier**. Spend a couple of minutes to think about how you would go about solving this exercise using `dplyr`. 
+
+Hint: Think about the five data manipulation verbs, and the additional `group_by()` function.
+
+<!--
 By now you've learned the fundamentals of `dplyr`: the five data manipulation verbs and the additional `group_by()` function to discover interesting group-wise statistics. This exercise brings together these concepts and provides you with an opportunity to combine them to answer some interesting questions.
 
 Let us suppose we want to find the most visited destination for each carrier. Before reading ahead, please spend a couple of minutes thinking about how you might go about solving this exercise using dplyr.
 
 As this is the first time you are combining multiple dplyr concepts, we have broken this exercise down into smaller steps. Each step will allow you to focus on a specific concept.
+-->
 
 *** =pre_exercise_code
 
@@ -83,14 +89,14 @@ hflights %>%
 
 *** =instructions1
 
-Compute for every carrier, the aggregate number of visits to each destination.
+Compute for every carrier, the aggregate number of visits to each destination, and add it as column named `num_visits`.
 
 *** =solution1
 
 ```{r}
 hflights %>% 
   group_by(UniqueCarrier, Dest) %>%
-  summarise(n = n())
+  summarise(num_visits = n())
 ```
 
 *** =type2:NormalExercise 
@@ -107,8 +113,8 @@ Rank the aggregate number of visits for every carrier.
 ```{r}
 hflights %>% 
   group_by(UniqueCarrier, Dest) %>%
-  summarise(n = n()) %>%
-  mutate(rank = rank(desc(n)))
+  summarise(num_visits = n()) %>%
+  mutate(rank = rank(desc(num_visits)))
 ```
 
 
@@ -126,8 +132,8 @@ Filter the results to only return the top ranked destination for every carrier.
 ```{r}
 hflights %>% 
   group_by(UniqueCarrier, Dest) %>%
-  summarise(n = n()) %>%
-  mutate(rank = rank(desc(n))) %>%
+  summarise(num_visits = n()) %>%
+  mutate(rank = rank(desc(num_visits))) %>%
   filter(rank == 1)
 ```
 
