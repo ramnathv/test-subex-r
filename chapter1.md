@@ -411,3 +411,106 @@ library(ggplot2)
 ```{r}
 
 ```
+
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:564fc332a9
+
+## Base Graphics vs. ggplot2 (Part 2)
+
+Now suppose that we want to add a linear model to the scatterplot of `hp` vs `drat` colored by `cyl`. 
+
+We can do that in base graphics by (1) plotting the base scatterplot, (2) fitting a linear model to each subset of data (split by number of cylinders), and then (3) calling the function `abline` to plot the regression lines. You can copy-paste this code into the console to try it out.
+
+```{r}
+plot(mtcars$hp, mtcars$drat, col = as.factor(mtcars$cyl))
+for (cy in unique(mtcars$cyl)){
+  lm_mod <- lm(drat ~ hp, data = mtcars, subset = (cyl == cy))
+  abline(lm_mod, lty = 2)
+}
+```
+
+
+*** =instructions
+
+Use base graphics to
+
+- Create a scatterplot of `mpg` vs `wt` colored by `gear`
+- Add a regression line for each value of `gear`.
+
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+# Use base graphics
+
+
+
+
+# Use ggplot2
+
+
+
+```
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
+```
+
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:9cf0b8a51b
+
+## Base Graphics vs. ggplot2 (Part 3)
+
+The same scatterplot of `hp` vs `drat` colored by `cyl`, with a fitted regression line, can be achieved in `ggplot2` in a much more concise way by adding a `geom_smooth` layer
+
+```{r}
+ggplot(mtcars, aes(x = hp, y = drat, col = as.factor(cyl))) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F)
+```
+
+Note how `ggplot2` automatically fits multiple regression lines based on the number of cylinders.
+
+
+*** =instructions
+
+Use ggplot2 to
+
+- Create a scatterplot of `mpg` vs `wt` colored by `gear`
+- Add a regression line for each value of `gear`.
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+
+```
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
+```
