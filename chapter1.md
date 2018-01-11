@@ -359,6 +359,81 @@ ggplot(Vocab, aes(x = education, y = vocabulary, col = year, group = factor(year
 
 
 
+
+
+--- type:TabExercise lang:r xp:100 key:c5368bde79
+## Base Graphics vs. Ggplot2 (Part 1)
+
+To better appreciate `ggplot2` and understand how it works differently from base package, let us create a scatterplot of `hp` (horsepower) vs `drat` (rear axle ratio), colored by `cyl` (number of cylinders).
+
+```{r}
+# Base Graphics
+plot(mtcars$hp, mtcars$drat, col = as.factor(mtcars$cyl))
+
+# Ggplot2
+ggplot(mtcars, aes(x = hp, y = drat, col = as.factor(cyl))) +
+  geom_point()
+```
+
+Note that in both cases, we convert `cyl` to a factor as it represents discrete categories.
+
+
+*** =pre_exercise_code
+```{r}
+library(ggplot2)
+```
+
+*** =sample_code
+```{r}
+
+```
+
+*** =type1: NormalExercise
+*** =key1: 4a37341c9a
+*** =xp1: 100
+
+*** =instructions1
+
+Use base graphics to create a scatterplot of `mpg` vs `wt` colored by `gear` 
+
+*** =solution1
+```{r}
+
+```
+
+*** =hint1
+
+*** =sct1
+```{r}
+
+```
+
+*** =type2: NormalExercise
+*** =key2: 5afd94ad8e
+*** =xp2: 100
+
+*** =instructions2
+
+Use ggplot2 to create a scatterplot of `mpg` vs `wt` colored by `gear`.
+
+*** =sample_code2
+
+```{r}
+
+```
+
+*** =solution2
+```{r}
+
+```
+
+*** =hint2
+
+*** =sct2
+```{r}
+
+```
+
 --- type:NormalExercise lang:r xp:100 skills:1 key:3279d9b09b
 
 ## Base Graphics vs. Ggplot2 (Part 1)
