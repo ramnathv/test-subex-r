@@ -275,6 +275,8 @@ test_mc(2, feedback_msgs = c(msg1, msg2, msg3))
 
 --- type:TabExercise lang:r xp:90 key:cb0d9a46a3
 
+## Tab Exercise
+
 In this exercise we'll take a look at a more subtle example of defining and using linear models. ggplot2 and the Vocab data frame are already loaded for you.
 
 *** =pre_exercise_code
@@ -354,3 +356,58 @@ ggplot(Vocab, aes(x = education, y = vocabulary, col = year, group = factor(year
 ```
 
 
+
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:3279d9b09b
+
+## Base Graphics vs. Ggplot2 - Part 1
+
+To better appreciate `ggplot2` and understand how it works differently from base package, let us create a scatterplot of `hp` (horsepower) vs `drat` (rear axle ration) colored by `cyl` (number of cylinders).
+
+```{r}
+# Base Graphics
+plot(mtcars$hp, mtcars$drat, col = as.factor(mtcars$cyl))
+
+# Ggplot2
+ggplot(mtcars, aes(x = wt, y = mpg, col = as.factor(cyl))) +
+  geom_point()
+```
+
+Note that in both cases, we convert `cyl` to a factor as it represents discrete categories.
+
+
+*** =instructions
+
+Create a scatterplot of `mpg` vs `wt` colored by `gear` 
+
+- Use base graphics
+- Use ggplot2
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+library(ggplot2)
+```
+
+*** =sample_code
+```{r}
+# Base Graphics
+
+
+# Ggplot2
+
+
+```
+
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
+```
