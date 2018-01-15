@@ -170,7 +170,7 @@ setkey(DT, A, B)
 *** =sample_code
 
 ```{r}
-# enter your code here
+
 ```
 
 
@@ -181,6 +181,12 @@ setkey(DT, A, B)
 *** =instructions1
 
 Select the "b" group without using ==.
+
+*** =sample_code1
+
+```{r}
+
+```
 
 *** =solution1
 
@@ -196,6 +202,12 @@ DT["b"]
 *** =instructions2
 
 Select the "b" and "c" groups, without using ==.
+
+*** =sample_code2
+
+```{r}
+
+```
 
 *** =solution2
 
@@ -213,6 +225,12 @@ DT[c("b", "c")]
 
 Select the first row of the "b" and "c" groups using `mult`.
 
+*** =sample_code3
+
+```{r}
+
+```
+
 *** =solution3
 
 ```{r}
@@ -227,6 +245,12 @@ DT[c("b", "c"), mult = "first"]
 *** =instructions4
 
 Select the first and last row of the "b" and "c" groups. You will need to use `by = .EACHI` and `.SD` 
+
+*** =sample_code4
+
+```{r}
+
+```
 
 *** =solution4
 
@@ -246,6 +270,12 @@ Select the first and last row of the "b" and "c" groups and print out the group 
 *** =hint5
 
 You can use curly brackets to include two separate instructions inside the `j` argument.
+
+*** =sample_code5
+
+```{r}
+
+```
 
 *** =solution5
 
