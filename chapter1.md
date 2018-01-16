@@ -167,12 +167,6 @@ DT <- data.table(
 setkey(DT, A, B)
 ```
 
-*** =sample_code
-
-```{r}
-
-```
-
 
 *** =type1:NormalExercise
 *** =key1: 641a9fce9f
