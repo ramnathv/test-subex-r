@@ -179,7 +179,7 @@ Select the "b" group without using ==.
 *** =sample_code1
 
 ```{r}
-
+# Select ---
 ```
 
 *** =solution1
@@ -200,7 +200,7 @@ Select the "b" and "c" groups, without using ==.
 *** =sample_code2
 
 ```{r}
-
+# Select ---
 ```
 
 *** =solution2
@@ -222,7 +222,7 @@ Select the first row of the "b" and "c" groups using `mult`.
 *** =sample_code3
 
 ```{r}
-
+# Select ---
 ```
 
 *** =solution3
@@ -243,7 +243,7 @@ Select the first and last row of the "b" and "c" groups. You will need to use `b
 *** =sample_code4
 
 ```{r}
-
+# Select ---
 ```
 
 *** =solution4
@@ -268,7 +268,7 @@ You can use curly brackets to include two separate instructions inside the `j` a
 *** =sample_code5
 
 ```{r}
-
+# Select ---
 ```
 
 *** =solution5
