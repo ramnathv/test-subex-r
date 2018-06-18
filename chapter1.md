@@ -3,116 +3,6 @@ title       : Chapter 1
 description : This is a test chapter
 attachments :
   slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
-
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:8004c53525
-## A really bad movie
-
-Have a look at the plot that showed up in the viewer to the right. Which type of movie has the worst rating assigned to it?
-
-*** =instructions
-- Adventure
-- Action
-- Animation
-- Comedy
-
-*** =hint
-Have a look at the plot. Which color does the point with the lowest rating have?
-
-*** =pre_exercise_code
-```{r}
-# The pre exercise code runs code to initialize the user's workspace.
-# You can use it to load packages, initialize datasets and draw a plot in the viewer
-
-movies <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/course/introduction_to_r/movies.csv")
-
-library(ggplot2)
-
-ggplot(movies, aes(x = runtime, y = rating, col = genre)) + geom_point()
-```
-
-*** =sct
-```{r}
-# SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
-
-msg_bad <- "That is not correct!"
-msg_success <- "Exactly! There seems to be a very bad action movie in the dataset."
-test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad, msg_bad))
-```
-
---- type:NormalExercise lang:r xp:100 skills:1 key:795e7ff71c
-## More movies
-
-In the previous exercise, you saw a dataset about movies. In this exercise, we'll have a look at yet another dataset about movies!
-
-A dataset with a selection of movies, `movie_selection`, is available in the workspace.
-
-*** =instructions
-- Check out the structure of `movie_selection`.
-- Select movies with a rating of 5 or higher. Assign the result to `good_movies`.
-- Use `plot()` to  plot `good_movies$Run` on the x-axis, `good_movies$Rating` on the y-axis and set `col` to `good_movies$Genre`.
-
-*** =hint
-- Use `str()` for the first instruction.
-- For the second instruction, you should use `...[movie_selection$Rating >= 5, ]`.
-- For the plot, use `plot(x = ..., y = ..., col = ...)`.
-
-*** =pre_exercise_code
-```{r}
-# You can also prepare your dataset in a specific way in the pre exercise code
-load(url("https://s3.amazonaws.com/assets.datacamp.com/course/teach/movies.RData"))
-movie_selection <- Movies[Movies$Genre %in% c("action", "animated", "comedy"), c("Genre", "Rating", "Run")]
-
-# Clean up the environment
-rm(Movies)
-```
-
-*** =sample_code
-```{r}
-# movie_selection is available in your workspace
-
-# Check out the structure of movie_selection
-
-
-# Select movies that have a rating of 5 or higher: good_movies
-
-
-# Plot Run (i.e. run time) on the x axis, Rating on the y axis, and set the color using Genre
-
-```
-
-*** =solution
-```{r}
-# movie_selection is available in your workspace
-
-# Check out the structure of movie_selection
-str(movie_selection)
-
-# Select movies that have a rating of 5 or higher: good_movies
-good_movies <- movie_selection[movie_selection$Rating >= 5, ]
-
-# Plot Run (i.e. run time) on the x axis, Rating on the y axis, and set the color using Genre
-plot(good_movies$Run, good_movies$Rating, col = good_movies$Genre)
-```
-
-*** =sct
-```{r}
-# SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
-
-test_function("str", args = "object",
-              not_called_msg = "You didn't call `str()`!",
-              incorrect_msg = "You didn't call `str(object = ...)` with the correct argument, `object`.")
-
-test_object("good_movies")
-
-test_function("plot", args = "x")
-test_function("plot", args = "y")
-test_function("plot", args = "col")
-
-test_error()
-
-success_msg("Good work!")
-```
-
 --- type:BulletExercise lang:r xp:150 key:79e232200d
 
 ## Building a plot!
@@ -165,11 +55,17 @@ ggplot(mtcars, aes(x = mpg, y = wt)) +
 
 ## Advanced Group By Exercises
 
+Let us suppose we want to find the **most visited destination for each carrier**. Spend a couple of minutes to think about how you would go about solving this exercise using `dplyr`. 
+
+Hint: Think about the five data manipulation verbs, and the additional `group_by()` function.
+
+<!--
 By now you've learned the fundamentals of `dplyr`: the five data manipulation verbs and the additional `group_by()` function to discover interesting group-wise statistics. This exercise brings together these concepts and provides you with an opportunity to combine them to answer some interesting questions.
 
 Let us suppose we want to find the most visited destination for each carrier. Before reading ahead, please spend a couple of minutes thinking about how you might go about solving this exercise using dplyr.
 
 As this is the first time you are combining multiple dplyr concepts, we have broken this exercise down into smaller steps. Each step will allow you to focus on a specific concept.
+-->
 
 *** =pre_exercise_code
 
@@ -193,14 +89,14 @@ hflights %>%
 
 *** =instructions1
 
-Compute for every carrier, the aggregate number of visits to each destination.
+Compute for every carrier, the aggregate number of visits to each destination, and add it as column named `num_visits`.
 
 *** =solution1
 
 ```{r}
 hflights %>% 
   group_by(UniqueCarrier, Dest) %>%
-  summarise(n = n())
+  summarise(num_visits = n())
 ```
 
 *** =type2:NormalExercise 
@@ -217,8 +113,8 @@ Rank the aggregate number of visits for every carrier.
 ```{r}
 hflights %>% 
   group_by(UniqueCarrier, Dest) %>%
-  summarise(n = n()) %>%
-  mutate(rank = rank(desc(n)))
+  summarise(num_visits = n()) %>%
+  mutate(rank = rank(desc(num_visits)))
 ```
 
 
@@ -236,8 +132,8 @@ Filter the results to only return the top ranked destination for every carrier.
 ```{r}
 hflights %>% 
   group_by(UniqueCarrier, Dest) %>%
-  summarise(n = n()) %>%
-  mutate(rank = rank(desc(n))) %>%
+  summarise(num_visits = n()) %>%
+  mutate(rank = rank(desc(num_visits))) %>%
   filter(rank == 1)
 ```
 
@@ -271,12 +167,6 @@ DT <- data.table(
 setkey(DT, A, B)
 ```
 
-*** =sample_code
-
-```{r}
-# enter your code here
-```
-
 
 *** =type1:NormalExercise
 *** =key1: 641a9fce9f
@@ -285,6 +175,12 @@ setkey(DT, A, B)
 *** =instructions1
 
 Select the "b" group without using ==.
+
+*** =sample_code1
+
+```{r}
+# Select ---
+```
 
 *** =solution1
 
@@ -300,6 +196,12 @@ DT["b"]
 *** =instructions2
 
 Select the "b" and "c" groups, without using ==.
+
+*** =sample_code2
+
+```{r}
+# Select ---
+```
 
 *** =solution2
 
@@ -317,6 +219,12 @@ DT[c("b", "c")]
 
 Select the first row of the "b" and "c" groups using `mult`.
 
+*** =sample_code3
+
+```{r}
+# Select ---
+```
+
 *** =solution3
 
 ```{r}
@@ -331,6 +239,12 @@ DT[c("b", "c"), mult = "first"]
 *** =instructions4
 
 Select the first and last row of the "b" and "c" groups. You will need to use `by = .EACHI` and `.SD` 
+
+*** =sample_code4
+
+```{r}
+# Select ---
+```
 
 *** =solution4
 
@@ -351,6 +265,12 @@ Select the first and last row of the "b" and "c" groups and print out the group 
 
 You can use curly brackets to include two separate instructions inside the `j` argument.
 
+*** =sample_code5
+
+```{r}
+# Select ---
+```
+
 *** =solution5
 
 ```{r}
@@ -358,3 +278,344 @@ You can use curly brackets to include two separate instructions inside the `j` a
 DT[c("b", "c"), {print(.SD); .SD[c(1, .N)]}, by = .EACHI]
 ```
 
+--- type:RStudioMultipleChoiceExercise xp:50 skills:1 key:a5dc9ea6f9
+
+## Let's get you set up!
+
+In order for you to use the RStudio IDE on your own computer, you will need to install the appropriate items. Garrett just explained how to do this for Mac, PC and Linux users.
+
+Which website should you visit to download a copy of the R language?
+
+*** =instructions
+- rstudio.com/download
+- cran.r-project.org
+- You do not need to download a copy of the R language
+
+*** =hint
+Garrett showed you two websites you need to visit to download the appropriate software.
+
+*** =sct
+```{r,eval=FALSE}
+msg1 <- "Not quite! You can visit rstudio.com/download[(https://www.rstudio.com/products/rstudio/download/)] to download the RStudio IDE, but not a copy of the R language itself."
+msg2 <- "Nice! Let's start taking a look at all the cool stuff you just downloaded."
+msg3 <- "Try again! It is important to download a copy of the R language in order to use the RStudio IDE and perform data analysis on your desktop or server."
+
+test_mc(2, feedback_msgs = c(msg1, msg2, msg3))
+```
+
+--- type:TabExercise lang:r xp:90 key:cb0d9a46a3
+
+## Tab Exercise
+
+In this exercise we'll take a look at a more subtle example of defining and using linear models. ggplot2 and the Vocab data frame are already loaded for you.
+
+*** =pre_exercise_code
+
+```{r}
+library(ggplot2)
+theme_set(theme_gray())
+library(car)
+library(RColorBrewer)
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# !   DON'T REMOVE THIS SUBSAMPLING PLEASE, BACKEND CAN'T HANDLE BIGGER DATASET TO PLOT   !
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+set.seed(1)
+Vocab <- car::Vocab
+Vocab <- Vocab[sample(1:nrow(Vocab), nrow(Vocab)*0.1),]
+```
+
+
+*** =sample_code
+
+```{r}
+ggplot(Vocab, aes(x = education, y = vocabulary)) +
+  geom_jitter(alpha = 0.2)
+```
+
+*** =type1:NormalExercise
+*** =key1: 33c3544039
+*** =xp1: 30
+
+*** =instructions1
+
+Add a `stat_smooth()` layer with method set to "lm" and `se = FALSE` to this jittered plot of `vocabulary` against `education`.
+
+*** =solution1
+
+```{r}
+# Plot 1: Jittered scatter plot, add a linear model (lm) smooth
+ggplot(Vocab, aes(x = education, y = vocabulary)) +
+  geom_jitter(alpha = 0.2) +
+  stat_smooth(method = "lm", se = F)
+```
+
+*** =type2:NormalExercise
+*** =key2: 636df4c77e
+*** =xp2: 30
+
+*** =instructions2
+
+Update the plot so that points are colored by `year`. You should remove the `geom_jitter` layer from the plot.
+
+
+*** =solution2
+
+```{r}
+# Plot 2: Only lm, colored by year
+ggplot(Vocab, aes(x = education, y = vocabulary, col = factor(year))) +
+  stat_smooth(method = "lm", se = F)
+```
+
+
+*** =type3:NormalExercise
+*** =key3: adabd6e0ef
+*** =xp3: 30
+
+*** =instructions3
+
+Use a sequential color palette to make the plot prettier. This can be done by setting `col = year` and `group = factor(year)` in the `ggplot` call. Use `scale_color_gradientn` with colors drawn from a ColorBrewer palette.
+
+*** =solution3
+
+```{r}
+# Plot 4: Change col and group, specify alpha, size and geom, and 
+# add scale_color_gradient
+ggplot(Vocab, aes(x = education, y = vocabulary, col = year, group = factor(year))) +
+  stat_smooth(method = "lm", se = F, alpha = 0.6, size = 2) +
+  scale_color_gradientn(colors = brewer.pal(9,"YlOrRd"))
+```
+
+
+
+
+
+
+
+--- type:TabExercise lang:r xp:100 key:c5368bde79
+## Base Graphics vs. Ggplot2 (Part 1)
+
+To better appreciate `ggplot2` and understand how it works differently from base package, let us create a scatterplot of `hp` (horsepower) vs `drat` (rear axle ratio), colored by `cyl` (number of cylinders).
+
+```{r}
+# Base Graphics
+plot(mtcars$hp, mtcars$drat, col = as.factor(mtcars$cyl))
+
+# Ggplot2
+ggplot(mtcars, aes(x = hp, y = drat, col = as.factor(cyl))) +
+  geom_point()
+```
+
+Note that in both cases, we convert `cyl` to a factor as it represents discrete categories.
+
+
+*** =pre_exercise_code
+```{r}
+library(ggplot2)
+```
+
+*** =sample_code
+```{r}
+
+```
+
+*** =type1: NormalExercise
+*** =key1: 4a37341c9a
+*** =xp1: 100
+
+*** =instructions1
+
+Use base graphics to create a scatterplot of `mpg` vs `wt` colored by `gear` 
+
+*** =solution1
+```{r}
+
+```
+
+*** =hint1
+
+*** =sct1
+```{r}
+
+```
+
+*** =type2: NormalExercise
+*** =key2: 5afd94ad8e
+*** =xp2: 100
+
+*** =instructions2
+
+Use ggplot2 to create a scatterplot of `mpg` vs `wt` colored by `gear`.
+
+*** =sample_code2
+
+```{r}
+
+```
+
+*** =solution2
+```{r}
+
+```
+
+*** =hint2
+
+*** =sct2
+```{r}
+
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:3279d9b09b
+
+## Base Graphics vs. Ggplot2 (Part 1)
+
+To better appreciate `ggplot2` and understand how it works differently from base package, let us create a scatterplot of `hp` (horsepower) vs `drat` (rear axle ratio), colored by `cyl` (number of cylinders).
+
+```{r}
+# Base Graphics
+plot(mtcars$hp, mtcars$drat, col = as.factor(mtcars$cyl))
+
+# Ggplot2
+ggplot(mtcars, aes(x = hp, y = drat, col = as.factor(cyl))) +
+  geom_point()
+```
+
+Note that in both cases, we convert `cyl` to a factor as it represents discrete categories.
+
+
+*** =instructions
+
+Create a scatterplot of `mpg` vs `wt` colored by `gear` 
+
+- Use base graphics
+- Use ggplot2
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+library(ggplot2)
+```
+
+*** =sample_code
+```{r}
+# Base Graphics
+
+
+# Ggplot2
+
+
+```
+
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
+```
+
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:564fc332a9
+
+## Base Graphics vs. ggplot2 (Part 2)
+
+Now suppose that we want to add a linear model to the scatterplot of `hp` vs `drat` colored by `cyl`. 
+
+We can do that in base graphics by (1) plotting the base scatterplot, (2) fitting a linear model to each subset of data (split by number of cylinders), and then (3) calling the function `abline` to plot the regression lines. You can copy-paste this code into the console to try it out.
+
+```{r}
+plot(mtcars$hp, mtcars$drat, col = as.factor(mtcars$cyl))
+for (cy in unique(mtcars$cyl)){
+  lm_mod <- lm(drat ~ hp, data = mtcars, subset = (cyl == cy))
+  abline(lm_mod, lty = 2)
+}
+```
+
+
+*** =instructions
+
+Use base graphics to
+
+- Create a scatterplot of `mpg` vs `wt` colored by `gear`
+- Add a regression line for each value of `gear`.
+
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+# Use base graphics
+
+
+
+
+# Use ggplot2
+
+
+
+```
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
+```
+
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:9cf0b8a51b
+
+## Base Graphics vs. ggplot2 (Part 3)
+
+The same scatterplot of `hp` vs `drat` colored by `cyl`, with a fitted regression line, can be achieved in `ggplot2` in a much more concise way by adding a `geom_smooth` layer
+
+```{r}
+ggplot(mtcars, aes(x = hp, y = drat, col = as.factor(cyl))) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F)
+```
+
+Note how `ggplot2` automatically fits multiple regression lines based on the number of cylinders.
+
+
+*** =instructions
+
+Use ggplot2 to
+
+- Create a scatterplot of `mpg` vs `wt` colored by `gear`
+- Add a regression line for each value of `gear`.
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+
+```
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
+```
